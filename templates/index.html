@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PROHATS</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: #bf0228;
+      font-size: 48px;
+      margin: 0;
+      text-shadow:
+        -1px -1px 0 white,
+         1px -1px 0 white,
+        -1px  1px 0 white,
+         1px  1px 0 white;
+    }
+
+    .logo {
+      height: 80px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    input[type="file"],
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #bf0228;
+      border-radius: 8px;
+      background-color: black;
+      color: white;
+      width: 300px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #bf0228;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>PRO</h1>
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+    <h1>HATS</h1>
+  </div>
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="archivo" required />
+    <button type="submit">Cargar archivo</button>
+  </form>
+
+  <input type="text" placeholder="Ingrese ID o nombre de cliente..." id="cliente-input" onkeydown="buscarCliente(event)">
+
+  <div class="footer">
+    &copy; Ing. Derek Franco 2025
+  </div>
+
+  <script>
+    function buscarCliente(event) {
+      if (event.key === "Enter") {
+        const cliente = document.getElementById("cliente-input").value.trim();
+        window.location.href = "/buscar?cliente=" + encodeURIComponent(cliente);
+      }
+    }
+  </script>
+</body>
+</html>
